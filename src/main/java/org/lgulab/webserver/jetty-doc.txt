@@ -1,0 +1,7 @@
+
+https://www.eclipse.org/jetty/documentation/current/embedded-examples.html 
+
+https://www.eclipse.org/jetty/documentation/current/embedding-jetty.html
+
+https://www.eclipse.org/jetty/documentation/current/advanced-embedding.html
+
