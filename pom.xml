@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>lgu-lab</groupId>
 	<artifactId>tiny-http-server</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	
 	<build>
 		<plugins>
@@ -15,8 +15,60 @@
 					<source>1.7</source>
 					<target>1.7</target>
 				</configuration>
+				
 			</plugin>
+		
+			<!-- Copy all the required JARs in "target/lib" -->
+<!-- 			<plugin>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<phase>install</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/lib</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+ -->			
+			<plugin>
+				<!-- Maven assembly plugin : Everything in a single JAR file -->
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<version>2.4.1</version>
+				<configuration>
+					<!-- get all project dependencies -->
+					<descriptorRefs>
+						<descriptorRef>jar-with-dependencies</descriptorRef>
+					</descriptorRefs>
+					<!-- MainClass in manifest make an executable jar -->
+					<archive>
+						<manifest>
+							<mainClass>org.lgulab.webserver.WebServerMonoContext</mainClass>
+						</manifest>
+					</archive>
+					<finalName>${project.artifactId}-${project.version}-full</finalName>
+					<appendAssemblyId>false</appendAssemblyId>
+				</configuration>
+
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<!-- bind to the packaging phase -->
+						<phase>install</phase> 
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>				
+
+			</plugin>
+			
 		</plugins>
+			
 	</build>
 	
 	<dependencies>

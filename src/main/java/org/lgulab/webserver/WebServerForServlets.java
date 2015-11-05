@@ -4,6 +4,7 @@ import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletHandler;
 import org.lgulab.webserver.servlets.HelloServlet;
 import org.lgulab.webserver.servlets.PingServlet;
+import org.lgulab.webserver.servlets.SessionServlet;
 
 /**
  * Minimal Servlet Example
@@ -40,18 +41,16 @@ public class WebServerForServlets {
         // IMPORTANT:
         // This is a raw Servlet, not a Servlet that has been configured
         // through a web.xml @WebServlet annotation, or anything similar.
-//        servletHandler.addServletWithMapping(HelloServlet.class, "/*");
-        servletHandler.addServletWithMapping(HelloServlet.class, "/hello/*");
-        servletHandler.addServletWithMapping(PingServlet.class,  "/ping/*");
+        servletHandler.addServletWithMapping(HelloServlet.class,    "/hello/*");
+        servletHandler.addServletWithMapping(PingServlet.class,     "/ping/*");
+        servletHandler.addServletWithMapping(SessionServlet.class,  "/session/*"); // Error : "No SessionManager"
  
         // Start things up!
         server.start();
  
         // The use of server.join() the will make the current thread join and
         // wait until the server is done executing.
-        // See
-        // http://docs.oracle.com/javase/7/docs/api/java/lang/Thread.html#join()
+        // See : http://docs.oracle.com/javase/7/docs/api/java/lang/Thread.html#join()
         server.join();    
     }
-	
 }

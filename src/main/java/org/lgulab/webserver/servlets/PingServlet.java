@@ -17,6 +17,6 @@ public class PingServlet extends HttpServlet
     {
         response.setContentType("text/html");
         response.setStatus(HttpServletResponse.SC_OK);
-        response.getWriter().println("<h1>Pong</h1>");
+        response.getWriter().println("<h1>Pong (from servlet)</h1>");
     }
 }
