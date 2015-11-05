@@ -35,6 +35,8 @@ public class WebServerForServlets {
         ServletHandler servletHandler = new ServletHandler();
         server.setHandler(servletHandler);
  
+        // No Context => No Session Manager => No session 
+        
         // Passing in the class for the Servlet allows jetty to instantiate an
         // instance of that Servlet and mount it on a given context path.
  

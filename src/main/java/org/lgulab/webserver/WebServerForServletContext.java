@@ -1,6 +1,8 @@
 package org.lgulab.webserver;
 
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.session.HashSessionManager;
+import org.eclipse.jetty.server.session.SessionHandler;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.lgulab.webserver.servlets.HelloServlet;
 import org.lgulab.webserver.servlets.PingServlet;
@@ -16,8 +18,13 @@ public class WebServerForServletContext {
 	public static void main(String[] args) throws Exception
     {
 		Server server = new Server(8080);
-		ServletContextHandler servletContextHandler = new ServletContextHandler(server, "/ctx");
- 
+		
+		ServletContextHandler servletContextHandler = new ServletContextHandler(server, "/");
+        server.setHandler(servletContextHandler);
+
+        // Add Session Manager
+		servletContextHandler.setSessionHandler( new SessionHandler( new HashSessionManager() ) );
+		
         // Passing in the class for the Servlet allows jetty to instantiate an
         // instance of that Servlet and mount it on a given context path.
  
